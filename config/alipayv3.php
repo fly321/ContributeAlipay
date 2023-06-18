@@ -4,7 +4,7 @@ return [
     "appId" => env("ALIPAY_APP_ID"),
     "rsaPrivateKey" => env("ALIPAY_RSA_PRIVATE_KEY"),
     "alipayrsaPublicKey" => env("ALIPAYRSA_PUBLIC_KEY"),
-    "AppCertPath" => public_path().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."cert".DIRECTORY_SEPARATOR."appCertPublicKey_2021004100605503.crt",
+    "AppCertPath" => public_path().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."cert".DIRECTORY_SEPARATOR."appCertPublicKey_".env("ALIPAY_APP_ID").".crt",
     "AlipayPublicCertPath" => public_path().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."cert".DIRECTORY_SEPARATOR."alipayCertPublicKey_RSA2.crt",
     "RootCertPath" => public_path().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."cert".DIRECTORY_SEPARATOR."alipayRootCert.crt",
     "isCertificate" => true, // true证书模式 false秘钥模式
