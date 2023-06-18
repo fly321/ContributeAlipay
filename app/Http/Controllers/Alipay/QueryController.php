@@ -105,7 +105,14 @@ class QueryController extends Controller
         // 游标翻页
         $cursor = $request->input("cursor", 0);
         $limit = $request->input("limit", 10);
-        $list = $aliPayOrder->where("id", "<=", $cursor)->orderBy("id", "desc")->limit($limit)->get();
+        $contain = $request->input("contain", true);
+        $where = [];
+        if ($contain) {
+            $where[] = ["id", "<=", $cursor];
+        }else{
+            $where[] = ["id", "<", $cursor];
+        }
+        $list = $aliPayOrder->where($where)->orderBy("id", "desc")->limit($limit)->get();
         // 打印sql
         $list = $list->toArray();
         try {

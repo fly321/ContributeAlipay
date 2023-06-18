@@ -166,6 +166,7 @@
         },
         data: ()=>{
             return {
+                contain:true,
                 maxId: maxId,
                 payObj: {
                     price: 0.01,
@@ -258,12 +259,14 @@
             loadMore(){
                 this.getList(this.cursor);
             },
-            getList(cursor,limit=10){
+            getList(cursor,limit=3){
                 axios.post('/alipay/api/list', {
                     cursor: this.cursor,
-                    limit: limit
+                    limit: limit,
+                    contain: this.contain
                 }).then(res=>{
                     this.cursor = res.data.data.cursor;
+                    this.contain = false;
                     // push
                     res.data.data.list.forEach(item=>{
                         this.tableData.push(item);
