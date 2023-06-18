@@ -1,5 +1,12 @@
 # ContributeAlipay
+### 环境需求
+* php >= 8.1
 
+### 安装
+```shell
+git clone https://github.com/fly321/ContributeAlipay.git
+composer install
+```
 ### 需要配置的地方
 > .env
 
