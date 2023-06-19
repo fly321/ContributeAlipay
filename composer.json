@@ -63,12 +63,6 @@
             "php-http/discovery": true
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/alipay/alipay-sdk-php-all.git"
-        }
-    ],
     "minimum-stability": "stable",
     "prefer-stable": true
 }
