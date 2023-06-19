@@ -5,7 +5,9 @@
 ### 安装
 ```shell
 git clone https://github.com/fly321/ContributeAlipay.git
-composer install
+composer update
+php artisan key:generate
+php artisan migrate
 ```
 ### 需要配置的地方
 > .env
