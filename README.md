@@ -1,4 +1,5 @@
 # ContributeAlipay
+![img.png](./public/github/img.png)
 ### 环境需求
 * php >= 8.1
 
