@@ -18,11 +18,14 @@ use ReflectionMethod;
 #[RequestMapping(prefix: "alipay")]
 class QueryController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set("PRC");
+    }
+
     #[RequestMapping(path: "checkPay", name: "", method: ["POST"], middleware: "", domain: "", prefix: "")]
     public function checkPay(Request $request)
     {
-        // 设置中国时区
-        date_default_timezone_set("PRC");
         try {
             $array = (new QueryDao())->query($request->all());
         } catch (\Exception $e) {
@@ -55,7 +58,7 @@ class QueryController extends Controller
     #[RequestMapping(path: "createPay", name: "", method: ["POST","GET"], middleware: "", domain: "", prefix: "")]
     public function createPay(Request $request){
         $price = $request->input("price", 0.01);
-        $orderSn = $request->input("orderSn", md5(Random::generate(32).time()));
+        $orderSn = $request->input("orderSn", date("YmdHis").Random::generate(4, "0123456789"));
         $remark = $request->input("remark", "");
         if ($remark == "") $remark = "给你一拳！";
         $uid = config("alipayv3.uid");
