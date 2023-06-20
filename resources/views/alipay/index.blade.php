@@ -222,6 +222,8 @@
                 }
             },
             createPay(){
+                // 自动补0 两位
+                this.form.price.val = parseFloat(this.form.price.val).toFixed(2);
                 axios.post('/alipay/api/createPay', {
                     price: this.form.price.val,
                     remark: this.form.remark.val,
