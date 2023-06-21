@@ -10,6 +10,7 @@ class QueryDao
 {
     private AlipayDataBillAccountingApiImpl $alipay;
     const ALIPAY_ORDER_NO_OR_TRANS_MEMO_NOT_EMPTY = "alipay_order_no or trans_memo not empty!";
+    const ORDER_NOT_EXITES = "order not exits!";
     public function __construct()
     {
         $this->alipay = new AlipayDataBillAccountingApiImpl();
@@ -30,6 +31,15 @@ class QueryDao
         if ($data['alipay_order_no'] == "" && $data['trans_memo'] == "") {
             throw new \Exception(static::ALIPAY_ORDER_NO_OR_TRANS_MEMO_NOT_EMPTY);
         }
+
+        if ($data['trans_memo'] != "") {
+            $alipayOrder = AlipayOrder::where("sn", $params['trans_memo'])->first();
+            if (!$alipayOrder){
+                throw new \Exception(static::ORDER_NOT_EXITES);
+            }
+
+        }
+
 
         try {
             return $this->alipay->query($data);
