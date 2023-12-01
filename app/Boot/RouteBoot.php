@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteBoot
 {
-    public static function handle(){
+    /*public static function handle(){
 
         try {
             foreach (ScanningAlias::$annotation['_m'] as $key => $item) {
@@ -49,6 +49,29 @@ class RouteBoot
         } catch (\Exception $e) {
             ScanningAlias::getInstance()->scan();
             self::handle();
+        }
+    }*/
+
+    public static function handle () {
+        if (file_exists(base_path("routes.cache"))) {
+            $routes = json_decode(file_get_contents(base_path("routes.cache")), true);
+            foreach ($routes as $route) {
+                $r = Route::match($route['method'], $route['path'], [$route['class'], $route['methods']]);
+                if (isset($route['middleware']) && $route['middleware'] !== "") {
+                    $r->middleware($route['middleware']);
+                }
+                if (isset($route['domain']) && $route['domain'] !== "") {
+                    $r->domain($route['domain']);
+                }
+                if (isset($route['name']) && $route['name'] !== "") {
+                    $r->name($route['name']);
+                }
+                if (isset($route['prefix']) && $route['prefix'] !== "") {
+                    $r->prefix($route['prefix']);
+                }
+            }
+        } else {
+            exit("请执行命令 php artisan app:generate-routing-cache-command 生成路由缓存文件！");
         }
     }
 }
