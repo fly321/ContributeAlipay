@@ -1,0 +1,21 @@
+version: "3"
+networks:
+    flyserver:
+        driver: bridge
+services:
+    containerHyperfSkeleton:
+        image: hyperf/hyperf:8.1-alpine-v3.15-swoole-v5
+        container_name: containerHyperfSkeleton
+        ports:
+            - 55301:9501
+        volumes:
+            - ./:/data/projects
+        working_dir: /data/projects
+        networks:
+            - flyserver
+        entrypoint:
+            - /bin/sh
+        privileged: true
+        user: root
+        tty: true # 终端交互
+        restart: always
