@@ -52,6 +52,7 @@ class RouteBoot
         }
     }*/
 
+    // 读取缓存
     public static function handle () {
         if (file_exists(base_path("routes.cache"))) {
             $routes = json_decode(file_get_contents(base_path("routes.cache")), true);
